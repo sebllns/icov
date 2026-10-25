@@ -1,0 +1,16 @@
+# https://github.com/conan-io/examples2/blob/main/tutorial/consuming_packages/simple_cmake_project/run_example.sh
+
+[requires]
+zlib/1.2.13
+boost/1.82.0
+opencv/4.5.5
+
+[generators]
+CMakeDeps
+CMakeToolchain
+
+[options]
+opencv*:with_webp = False
+opencv*:with_ffmpeg = False
+opencv*:with_qt = False
+opencv*:with_gtk = False

@@ -1,0 +1,6 @@
+include/
+share/
+lib/
+!*.so
+!*.dll
+!*.meta
