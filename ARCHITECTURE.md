@@ -2,6 +2,8 @@
 
 Developer documentation for `sebllns/icov_core`, describing version 1.6.0 (commit `1ef2f6e`, 2024-01-22) as found in the code. File paths are relative to the repository root. Statements marked **(to verify)** are inferences from reading the code that have not been confirmed by running it.
 
+Note: the `core` submodule now tracks `master` (`1a86a66`, 2024-03-29, 37 commits after `1ef2f6e`). This document has not yet been refreshed for those changes (GOP playback, `sp/` superbuild, removal of `SymbolCoder`/`ZeroErrorCoder`).
+
 Scientific background: N. Mahmoudian Bidgoli, T. Maugey, A. Roumy, "Fine granularity access in interactive compression of 360-degree images based on rate-adaptive channel codes", IEEE Transactions on Multimedia, 2020, doi:10.1109/TMM.2020.3017890 ([arXiv:2006.14239](https://arxiv.org/abs/2006.14239)). LDPCA codes: D. Varodayan, A. Aaron, B. Girod, "Rate-adaptive codes for distributed source coding", Signal Processing 86(11), 2006.
 
 ---
