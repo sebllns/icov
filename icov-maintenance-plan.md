@@ -133,7 +133,7 @@ The format serves two roles: storage on the server and the unit of network trans
 Steps 4, 5 and the decode-side part of 10 can run in parallel once step 0 provides golden tests and a benchmark. Steps 8 and 9 can start on a local (loopback) transport before the network layer is final.
 
 Open decisions:
-- D1. Dependency source for CI/Docker: distro packages (Ubuntu 24.04) vs Conan with lockfile. Plan assumes distro packages.
+- D1. Dependency source for CI/Docker: decided, conda-forge (`environment.txt`, `environment-doc.txt` in core). The `sp/` superbuild and its Conan files were removed (tag `last-superbuild` in core). A conda lockfile can pin exact versions.
 - D2. Container for bitstream v2: custom chunked format vs ISO BMFF.
 - D3. Real-time target: resolution (e.g. 4K or 8K equirectangular), frame rate, viewport size, motion-to-photon budget, and network conditions (bandwidth, RTT, loss) to support.
 - D4. Whether the superproject `icov` survives as a meta-repo or is replaced by separate repos (`icov_core`, `icov-server`, `icov-player`, optional `icov-unity`).
