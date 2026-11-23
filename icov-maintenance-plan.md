@@ -10,7 +10,7 @@ Repositories:
 
 State of `icov_core` at `3fb66cf` (v2.1.0, 2026-11-23). Update this table when a step changes state.
 
-Current step: 6, protocol part. Next: `docs/streaming_protocol.md` (decision D6), then requests as messages and extractor and decoder in two processes on loopback.
+Current step: 6, protocol part. Spec written in core `doc/streaming_protocol.md` (D6: stateless server, one request per viewport per frame, TCP first), under review. Next: Phase B, requests as messages and extractor and decoder in two processes (loopback, then TCP).
 
 | Step | State | Done | Remaining |
 |---|---|---|---|
@@ -20,7 +20,7 @@ Current step: 6, protocol part. Next: `docs/streaming_protocol.md` (decision D6)
 | 3. Build and matrices | Partial | Conda dependencies (D1), superbuild removed, `imt_164_v2` compiled into the library, matrix set id and CRC in the stream (2.1.0) | Target-based CMake, presets, SIMD option, binary matrix format, `data/imt_18` (271 MB) still in the tree |
 | 4. Replace aff3ct | Not started | | 25 files in `lib/` and `app/` still use aff3ct |
 | 5. VTM prune | Not started | | `third-party/vvc` is 44.9k LOC |
-| 6. Bitstream v2 and protocol | In progress | Bitstream (2.0.0): ISOBMFF single file, parameter set, storage and transmitted block units, Exp-Golomb coding, block hashes and `--verify-hash` (D2: ISOBMFF). See `doc/bitstream_report.md` section 12 | Protocol spec, requests as messages, two-process loopback test, rate table in the parameter set, `z_min`/`z_max` coding, access block coding |
+| 6. Bitstream v2 and protocol | In progress | Bitstream (2.0.0): ISOBMFF single file, parameter set, storage and transmitted block units, Exp-Golomb coding, block hashes and `--verify-hash` (D2: ISOBMFF). See `doc/bitstream_report.md` section 12. Protocol spec `doc/streaming_protocol.md` (to review) | Requests as messages, two-process loopback test, rate table in the parameter set, `z_min`/`z_max` coding, access block coding |
 | 7. C API and Python | Not started | | |
 | 8. Streaming server | Not started | | |
 | 9. Native player | Not started | Viewer improvements in `icov_viewer` (monitor, legends, rate views) | |
@@ -159,7 +159,7 @@ Open decisions:
 - D3. Real-time target: resolution (e.g. 4K or 8K equirectangular), frame rate, viewport size, motion-to-photon budget, and network conditions (bandwidth, RTT, loss) to support.
 - D4. Whether the superproject `icov` survives as a meta-repo or is replaced by separate repos (`icov_core`, `icov-server`, `icov-player`, optional `icov-unity`).
 - D5. On-demand only (encode offline, stream stored files) or live (encode while streaming). Live changes encoder speed requirements and the index design. Plan assumes on-demand first.
-- D6. Extraction model A, B or C (see above), decided from step 0 and step 6 findings.
+- D6. Extraction model: decided, stateless server with client-side planning, one request per viewport per frame in priority groups (core `doc/streaming_protocol.md`). The server chooses INTER or INTRA from the stored rates; byte ranges (B) would need the rate index on the client and a new storage layout.
 - D7. Comparison baseline for evaluation: tiled viewport-adaptive streaming with a standard codec (e.g. HEVC/VVC tiles with DASH-SRD or OMAF viewport-dependent profiles), so results are comparable with the 360 streaming literature.
 
 ---
