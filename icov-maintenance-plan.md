@@ -6,6 +6,27 @@ Repositories:
 - `sebllns/icov_core` (1.6.0, last commit 2024-01-22): codec (LDPC/LDPCA layer, VTM-derived video layer, CLI, OpenGL/GLUT viewer, Qt demo).
 - `sebllns/icov` (0.3): superproject with Unity demonstrators, renderer, network, scripts. `core/` submodule pinned to `icov_core@1ef2f6e`. Does not configure as is (includes a missing `.cmake/AddGitSubmodule.cmake`).
 
+## Status
+
+State of `icov_core` at `3fb66cf` (v2.1.0, 2026-11-23). Update this table when a step changes state.
+
+Current step: 6, protocol part. Next: `docs/streaming_protocol.md` (decision D6), then requests as messages and extractor and decoder in two processes on loopback.
+
+| Step | State | Done | Remaining |
+|---|---|---|---|
+| 0. Baseline | Partial | Encoder performance report (`doc/encoder_performance_report.md`), determinism checked by the integration test | `docs/baseline_report.md`, decode profiling, extraction semantics, imt_18 derivation check |
+| 1. CI and tests | Done | `ci.yml` (unit and integration tests, CTest labels), `docs.yml` (Doxygen on GitHub Pages) | ASan/UBSan job, static checks job |
+| 2. Release and Docker | Partial | Tags up to `v2.1.0`, Dockerfile | Release workflow, image on ghcr.io, `CHANGELOG.md`, `CITATION.cff` |
+| 3. Build and matrices | Partial | Conda dependencies (D1), superbuild removed, `imt_164_v2` compiled into the library, matrix set id and CRC in the stream (2.1.0) | Target-based CMake, presets, SIMD option, binary matrix format, `data/imt_18` (271 MB) still in the tree |
+| 4. Replace aff3ct | Not started | | 25 files in `lib/` and `app/` still use aff3ct |
+| 5. VTM prune | Not started | | `third-party/vvc` is 44.9k LOC |
+| 6. Bitstream v2 and protocol | In progress | Bitstream (2.0.0): ISOBMFF single file, parameter set, storage and transmitted block units, Exp-Golomb coding, block hashes and `--verify-hash` (D2: ISOBMFF). See `doc/bitstream_report.md` section 12 | Protocol spec, requests as messages, two-process loopback test, rate table in the parameter set, `z_min`/`z_max` coding, access block coding |
+| 7. C API and Python | Not started | | |
+| 8. Streaming server | Not started | | |
+| 9. Native player | Not started | Viewer improvements in `icov_viewer` (monitor, legends, rate views) | |
+| 10. Network experiments | Not started | | |
+| 11. Optional clients | Not started | | |
+
 ## Findings that drive the plan
 
 | Area | Observation | Consequence |
